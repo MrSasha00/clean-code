@@ -6,12 +6,12 @@ public class TagProcessor : ITagProcessor
 {
 	public void Process(List<Token> tags, Stack<Token> tagStack)
 	{
-		ProceedEscaped(tags);
-		ProceedInWords(tags);
-		ProceedTags(tagStack);
+		ProceedEscapedTags(tags);
+		ProceedInWordsTags(tags);
+		ProceedPairTags(tagStack);
 	}
 
-	private void ProceedInWords(List<Token> tags)
+	private void ProceedInWordsTags(List<Token> tags)
 	{
 		for (var i = 0; i < tags.Count; i++)
 		{
@@ -42,7 +42,7 @@ public class TagProcessor : ITagProcessor
 		}
 	}
 
-	private void ProceedEscaped(List<Token> tags)
+	private void ProceedEscapedTags(List<Token> tags)
 	{
 		for (var i = 0; i < tags.Count - 1; i++)
 		{
@@ -64,7 +64,7 @@ public class TagProcessor : ITagProcessor
 		}
 	}
 
-	private void ProceedTags(Stack<Token> tagStack)
+	private void ProceedPairTags(Stack<Token> tagStack)
 	{
 		var tempStack = new Stack<Token>();
 

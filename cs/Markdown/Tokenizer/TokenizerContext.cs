@@ -1,14 +1,8 @@
 ﻿namespace Markdown.Tokenizer;
 
-public class TokenizerContext
+public class TokenizerContext(string text)
 {
-	private int position;
-	private readonly string text;
-	public TokenizerContext(string text)
-	{
-		this.text = text;
-		position = 0;
-	}
+	private int position = 0;
 	public bool IsEnd => position >= text.Length;
 	public char Current => text[position];
 	public int Position => position;

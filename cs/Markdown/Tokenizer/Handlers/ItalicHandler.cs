@@ -8,10 +8,7 @@ public class ItalicHandler : IHandler
 	{
 		var symbol = ctx.Current;
 
-		if(symbol != '_')
-			return null;
-
-		if(ctx.Next == '_')
+		if (symbol != '_' || ctx.Next == '_')
 			return null;
 
 		if (char.IsDigit(ctx.Previous ?? ' ') || char.IsDigit(ctx.Next ?? ' '))
@@ -27,7 +24,7 @@ public class ItalicHandler : IHandler
 			return new ItalicTag(TagStatus.Closed);
 		}
 
-		if (ctx.Previous != ' ' && ctx.Next != ' ' )
+		if (ctx.Previous != ' ' && ctx.Next != ' ')
 			return new ItalicTag(TagStatus.InWord);
 
 		return null;

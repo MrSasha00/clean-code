@@ -8,7 +8,7 @@ public class HeaderHandler : IHandler
 	{
 		var symbol = ctx.Current;
 
-		if(symbol != '#')
+		if (symbol != '#')
 			return null;
 
 		if ((ctx.Next == ' ' && (ctx.Previous == '\n' || ctx.Position == 0)) || (ctx.Previous == '\\'))

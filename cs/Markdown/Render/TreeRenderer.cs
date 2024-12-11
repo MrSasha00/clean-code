@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using Markdown.Tokenizer.Nodes;
+using Markdown.TreeBuilder.Nodes;
 
 namespace Markdown.Render;
 
-public class HtmlRenderer : ITokenRenderer
+public class TreeRenderer : ITreeRenderer
 {
 	public string Render(Node tokens)
 	{
@@ -19,10 +19,7 @@ public class HtmlRenderer : ITokenRenderer
 		return node switch
 		{
 			TextNode textNode => textNode.Value,
-			HeaderNode => $"<h1>{Render(node)}</h1>",
-			ItalicNode => $"<em>{Render(node)}</em>",
-			BoldNode => $"<strong>{Render(node)}</strong>",
-			_ => throw new Exception($"Unknown token type: {node.GetType()}")
+			_ => $"{node.OpenTag}{Render(node)}{node.CloseTag}"
 		};
 	}
 }

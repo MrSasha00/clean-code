@@ -7,6 +7,5 @@ public enum TagStatus
 	Broken,
 	Escaped,
 	InWord,
-	Undefined,
 	Single
 }
