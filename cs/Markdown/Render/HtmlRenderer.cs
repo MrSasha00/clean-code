@@ -1,35 +1,28 @@
 ﻿using System.Text;
-using Markdown.Render.Renders;
-using Markdown.Tokenizer;
+using Markdown.Tokenizer.Nodes;
 
 namespace Markdown.Render;
 
 public class HtmlRenderer : ITokenRenderer
 {
-	private readonly Dictionary<TokenType, ITokenRender> _renders = new()
-	{
-		{ TokenType.Italic , new ItalicRender() },
-		{ TokenType.Bold , new BoldRender() },
-		{ TokenType.Header, new HeadRender() },
-		{ TokenType.Text, new TextRender() },
-		{ TokenType.ItemList, new ItemListRender() }
-	};
-
-	public string Render(List<Token> tokens)
+	public string Render(Node tokens)
 	{
 		var sb = new StringBuilder();
-		foreach (var token in tokens)
-		{
-			sb.Append(Render(token));
-		}
+		foreach (var token in tokens.Children)
+			sb.Append(RenderToken(token));
 
 		return sb.ToString();
 	}
 
-	private string Render(Token token)
+	private string? RenderToken(Node node)
 	{
-		return _renders[token.Type].Render(token);
+		return node switch
+		{
+			TextNode textNode => textNode.Value,
+			HeaderNode => $"<h1>{Render(node)}</h1>",
+			ItalicNode => $"<em>{Render(node)}</em>",
+			BoldNode => $"<strong>{Render(node)}</strong>",
+			_ => throw new Exception($"Unknown token type: {node.GetType()}")
+		};
 	}
-
-
 }

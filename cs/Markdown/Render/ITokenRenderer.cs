@@ -1,8 +1,8 @@
-﻿using Markdown.Tokenizer;
+﻿using Markdown.Tokenizer.Nodes;
 
 namespace Markdown.Render;
 
 public interface ITokenRenderer
 {
-	string Render(List<Token> tokens);
+	string Render(Node tokens);
 }

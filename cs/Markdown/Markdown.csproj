@@ -6,4 +6,15 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="FluentAssertions" Version="6.12.2" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+	  <PackageReference Include="NUnit" Version="4.2.2" />
+	  <PackageReference Include="Verify.NUnit" Version="28.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Tests\Markdown\snapshots\" />
+	</ItemGroup>
+
 </Project>

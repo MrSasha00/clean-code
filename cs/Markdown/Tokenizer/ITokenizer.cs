@@ -1,4 +1,6 @@
-﻿namespace Markdown.Tokenizer;
+﻿using Markdown.Tokenizer.Tags;
+
+namespace Markdown.Tokenizer;
 
 public interface ITokenizer
 {
