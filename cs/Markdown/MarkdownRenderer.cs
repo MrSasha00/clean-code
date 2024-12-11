@@ -1,5 +1,6 @@
 ﻿using Markdown.Render;
 using Markdown.Tokenizer;
+using Markdown.Tokenizer.Handlers;
 using Markdown.Tokenizer.Nodes;
 using Markdown.Tokenizer.Tags;
 
@@ -7,9 +8,15 @@ namespace Markdown;
 
 public class MarkdownRenderer : IMarkdown
 {
+	private readonly List<IHandler> handlers = new()
+	{
+		new HeaderHandler(),
+		new ItalicHandler(),
+		new BoldHandler(),
+	};
 	public string Render(string markdown)
 	{
-		var tokenizer = new MarkdownTokenizer();
+		var tokenizer = new MarkdownTokenizer(new HandlerManager(handlers), new TagProcessor());
 		var renderer = new HtmlRenderer();
 		var tokens = tokenizer.Tokenize(markdown);
 		var tree = ToTree(tokens);
